@@ -1,0 +1,79 @@
+#/bin/bash
+
+# ----------------------------------
+# Setting
+# ----------------------------------
+ROOT="$(pwd)"
+ROOT_VPN='/etc/openvpn'
+CONNECT_SERVER='vpn.server.local' 
+
+# ----------------------------------
+# Network Settings
+# ----------------------------------
+VPN_DNS='8.8.8.8'
+VPN_ROUTE='192.168.0.0'
+VPN_MASK='255.255.0.0'
+
+# VPN Interface
+IPV4_FOCT='10'
+IPV4_SOCT='8'
+
+# ----------------------------------
+# Self-signed cert
+# ----------------------------------
+VAR_COUNTRY='BR'
+VAR_PROVINCE='Example'
+VAR_CITY='Example'
+VAR_ORG='Example Inc'
+VAR_OU='Example Dept'
+VAR_EMAIL='contact@example.com'
+
+# ----------------------------------
+# REGEX
+# ----------------------------------
+VPN_REGEX='([0-9]+(\-)[a-z]+)$'
+OCT_REGEX='(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+VIP_REGEX="$IPV4_FOCT\.$IPV4_SOCT\.$OCT_REGEX\.$OCT_REGEX"
+
+# ----------------------------------
+# Skels
+# ----------------------------------
+SKEL_CLIENT="$ROOT/templates/skel/client.skel"
+SKEL_SERVER="$ROOT/templates/skel/server.skel"
+SKEL_VARS="$ROOT/templates/skel/vars.skel"
+
+# ----------------------------------
+# Iptables Rules
+# ----------------------------------
+RULES_MAIN="$ROOT/templates/rules/iptables.main"
+RULES_CUSTOM="$ROOT/templates/rules/iptables.custom"
+
+# ----------------------------------
+# Colors
+# ----------------------------------
+NORMAL='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+
+# ----------------------------------
+# Aux Functions
+# ----------------------------------
+cecho() {
+	case $1 in
+		yellow 	) echo -e "${YELLOW}$2${NORMAL}" ;;
+		normal 	) echo -e "${NORMAL}$2${NORMAL}" ;;
+		green	) echo -e "${GREEN}$2${NORMAL}" ;;
+		red 	) echo -e "${RED}$2${NORMAL}" ;;
+	esac
+}
+
+echo_success() {
+	cecho green '[  OK  ]'
+	return 0
+}
+echo_failed() {
+	cecho red '[FAILED]'
+	errors='true'
+	return 1
+}

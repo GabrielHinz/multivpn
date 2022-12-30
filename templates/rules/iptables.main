@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# ===========================================
+# MultiVPN - IPTABLES Rules
+# ===========================================
+# 
+# Desc: main rules for multivpn, vpns rules 
+# will be added in this file.
+#
+# ----------------------------------
+# Main
+# ----------------------------------
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# ----------------------------------
+# VPN Rules
+# ----------------------------------
+ROOT="/etc/openvpn"
+for vpn in $(ls $ROOT); do
+	rules=$ROOT/$vpn/rules/iptables
+	if [ -f $rules ]; then
+		bash $rules
+	fi
+done
+
+# ----------------------------------
+# Forward Rules
+# ----------------------------------
+iptables -A FORWARD -j DROP
+iptables -t nat -A POSTROUTING -j MASQUERADE

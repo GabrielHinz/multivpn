@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# ===========================================
+# MultiVPN - Auto Start
+# ===========================================
+# 
+# Desc: script used to enable vpn on reboot, 
+# this is part of multivpn service.
+#
+# ----------------------------------
+# Auto Start
+# ----------------------------------
+ROOT=/etc/openvpn
+for vpn in $(cat $ROOT/multivpn/.enabled); do
+        if ! ps -ef | grep "[o]penvpn --cd $ROOT/$vpn" &>/dev/null; then
+                openvpn --cd $ROOT/$vpn --script-security 2 --daemon \
+                        --config $ROOT/$vpn/openvpn.conf &>/dev/null
+        fi
+done

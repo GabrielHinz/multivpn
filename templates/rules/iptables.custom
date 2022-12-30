@@ -1,0 +1,24 @@
+# ===========================================
+# MultiVPN - IPTABLES Server Custom Rules
+# ===========================================
+#
+# Desc: Use this file to create default rules
+# for new vpn created.
+#
+# ----------------------------------
+# Placeholders
+# ----------------------------------
+# {{TUN}} -> VPN Interface
+# {{NETWORK}} -> VPN Network
+# {{PORT}} -> VPN Connect Port
+# {{DNS}} -> VPN DNS
+#
+# ----------------------------------
+# Example of use
+# ----------------------------------
+# iptables -A FORWARD -i {{TUN}} -s {{NETWORK}}/24 -d {{DNS}} -j ACCEPT
+#
+# ----------------------------------
+# Custom Rules
+# ----------------------------------
+iptables -A FORWARD -i {{TUN}} -s {{NETWORK}}/24 -d 192.168.70.162 -j ACCEPT

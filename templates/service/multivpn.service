@@ -1,0 +1,12 @@
+[Unit]
+Description=MultiVPN Iptables Service
+
+[Service]
+User=root
+Type=oneshot
+WorkingDirectory=/etc/openvpn/multivpn
+ExecStart=/usr/bin/bash /etc/openvpn/multivpn/rc.iptables
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
