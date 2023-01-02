@@ -87,6 +87,10 @@ fi
 CA_DIR="$ROOT/easy-rsa"
 cd $CA_DIR && source ./vars &>/dev/null
 
+if [ ! -f $CA_DIR/openssl.cnf ]; then
+	ln -s 'openssl-1.0.0.cnf' 'openssl.cnf'
+fi
+
 cecho yellow "\nCREATING RSA FILES:"
 printf '%-30s' "Generating Diffie-Hellman" && {
 	./clean-all &>/dev/null
