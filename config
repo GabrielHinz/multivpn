@@ -38,15 +38,21 @@ VIP_REGEX="$IPV4_FOCT\.$IPV4_SOCT\.$OCT_REGEX\.$OCT_REGEX"
 # ----------------------------------
 # Skels
 # ----------------------------------
-SKEL_CLIENT="$ROOT/templates/skel/client.skel"
-SKEL_SERVER="$ROOT/templates/skel/server.skel"
-SKEL_VARS="$ROOT/templates/skel/vars.skel"
+SKEL_CLIENT="$ROOT/resources/skel/client.skel"
+SKEL_SERVER="$ROOT/resources/skel/server.skel"
+SKEL_VARS="$ROOT/resources/skel/vars.skel"
 
 # ----------------------------------
 # Iptables Rules
 # ----------------------------------
-RULES_MAIN="$ROOT/templates/rules/iptables.main"
-RULES_CUSTOM="$ROOT/templates/rules/iptables.custom"
+RULES_MAIN="$ROOT/resources/rules/iptables.main"
+RULES_CUSTOM="$ROOT/resources/rules/iptables.custom"
+RULES_AUTOSTART="$ROOT/resources/rules/autostart"
+
+# ----------------------------------
+# Service
+# ----------------------------------
+VPN_SERVICE="$ROOT/resources/service/multivpn.service"
 
 # ----------------------------------
 # Colors

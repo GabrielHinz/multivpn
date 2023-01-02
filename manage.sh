@@ -74,7 +74,7 @@ check_dependencies() {
 	fi
 	fi
 	if [ ! -f /etc/systemd/system/multivpn.service ]; then
-		cp $ROOT/templates/service/multivpn.service /etc/systemd/system/
+		cp $VPN_SERVICE /etc/systemd/system/
 	fi
 	iptables_file="$ROOT_VPN/multivpn/rc.iptables"
 	if [ ! -f $iptables_file ]; then
@@ -146,7 +146,7 @@ if [ $EUID -ne 0 ]; then
        	cecho red "Error: run with root user"
 	exit
 fi
-$ROOT/templates/header && check_dependencies
+$ROOT/resources/header && check_dependencies
 
 _ALL=$(find $ROOT_VPN/ -maxdepth 1 -type d | egrep -o $VPN_REGEX)
 _OPTIONS=$(getopt -o lh --long help,enable:,list,start:,stop:,init,forward: -- "$@")
@@ -195,9 +195,9 @@ while true; do
 		--enable )
 			[[ "${2}" =~ $VPN_REGEX || "${2}" = 'all' ]] && arg=${2} || usage
 			cecho yellow "\nENABLING:"
-			if [ ! -f $ROOT_VPN/multivpn/autostart ]; then
-				cp $ROOT/templates/rules/autostart $ROOT_VPN/multivpn/
-			fi		
+			if [ ! -f $RULES_AUTOSTART ]; then
+				cp $RULES_ATUOSTART $ROOT_VPN/multivpn/
+			fi	
 			if [ $arg = 'all' ]; then
 				for vpn in $_ALL; do
 					printf '%-22s' "Enabling $vpn"
