@@ -24,7 +24,7 @@ Then access the created directory
     cd multivpn
     
 ### Configuration 
-On config file, define the your network and company settings. You can leave most of it as default, and change the field susing your favorite editor:
+On config file, define the your network and company settings. You can leave most of it as default, and change the fields using your favorite editor:
 
     vim config
 
