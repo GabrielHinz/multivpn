@@ -52,7 +52,8 @@ RULES_AUTOSTART="$ROOT/resources/rules/autostart"
 # ----------------------------------
 # Service
 # ----------------------------------
-VPN_SERVICE="$ROOT/resources/service/multivpn.service"
+SERVICE_ROOT="/etc/systemd/system"
+SERVICE_NAME="$ROOT/resources/service/multivpn.service"
 
 # ----------------------------------
 # Colors

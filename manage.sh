@@ -73,8 +73,8 @@ check_dependencies() {
 		exit 1
 	fi
 	fi
-	if [ ! -f /etc/systemd/system/multivpn.service ]; then
-		cp $VPN_SERVICE /etc/systemd/system/
+	if [ ! -f $SERVICE_ROOT/multivpn.service ]; then
+		cp $SERVICE_NAME $SERVICE_ROOT/
 	fi
 	iptables_file="$ROOT_VPN/multivpn/rc.iptables"
 	if [ ! -f $iptables_file ]; then
