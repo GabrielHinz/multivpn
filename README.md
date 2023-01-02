@@ -28,7 +28,7 @@ On config file, define the your network and company settings. You can leave most
 
     vim config
 
-* CONNECT_SERVER: IP or DNS record to your server
+* CONNECT_SERVER: Your server's IP or DNS record
 
 The `ifconfig` command can help in network configuration:
 
@@ -45,12 +45,17 @@ And configure the self-signed cert data
 * VAR_EMAIL: Email address
 
 ## Creating the first VPN
-In the multivpn directory, starts a new vpn executing:
+To start using multivpn, use the root user of your server
+    
+    sudo su
+    
+In the multivpn directory, starts a new VPN executing:
 
     manage.sh --init
     
 Confirm your self-signed cert data and continue. 
-<br><br>Then, create a name to your VPN, and select a unique number (1-254).
+
+Then, create a name to your VPN, and select a unique number (1-254).
 
 Now, wait while VPN is created. If everything went well, you will receive a green message that the VPN was successfully created,
 your new VPN files are stored in /etc/openvpn/`number-name`
@@ -89,7 +94,7 @@ For this demo I will enable the ip 192.168.1.5
 
     192.168.1.5
     
-Done! Now I can connect to 192.168.1.5 when connected to VPN 01-test.
+Done! Now the client can connect to 192.168.1.5 when is connected to VPN 01-test.
 
 ## Nice Commands
 
