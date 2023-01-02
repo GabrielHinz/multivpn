@@ -29,3 +29,8 @@ done
 # ----------------------------------
 iptables -A FORWARD -j DROP
 iptables -t nat -A POSTROUTING -j MASQUERADE
+
+# ----------------------------------
+# Autostart
+# ----------------------------------
+[[ -f autostart ]] && bash autostart
