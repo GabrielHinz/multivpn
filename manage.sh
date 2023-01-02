@@ -142,6 +142,10 @@ list_vpn() {
 # ----------------------------------
 # Start
 # ----------------------------------
+if [ $EUID -ne 0 ]; then
+       	cecho red "Error: run with root user"
+	exit
+fi
 $ROOT/templates/header && check_dependencies
 
 _ALL=$(find $ROOT_VPN/ -maxdepth 1 -type d | egrep -o $VPN_REGEX)
