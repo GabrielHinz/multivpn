@@ -2,7 +2,7 @@
 Creates and configure multiple VPN servers with specific forwarding rules.
 
 ## Getting Started
-following the instructions below, you will be able to quickly create a VPN server and configure it to allow forwarding to a server (or range) of your choice.
+Using this openvpn based tool you can quickly create multiple vpn services and configure forwarding of your planned routes.
 
 ### Prerequisites
 Requirements for running this script. To avoid runtime problems, make sure the requirements are installed, otherwise the tool will try to install on first run (only on ubuntu and centos).
