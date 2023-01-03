@@ -1,5 +1,5 @@
 # MultiVPN Server Generator
-Create and configure multiple VPN servers for infrastructure access, using Linux Servers.
+Creates and configure multiple VPN servers with specific forwarding rules.
 
 ## Getting Started
 following the instructions below, you will be able to quickly create a VPN server and configure it to allow forwarding to a server (or range) of your choice.
