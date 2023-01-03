@@ -5,7 +5,7 @@ Create and configure multiple VPN servers for infrastructure access, using Linux
 following the instructions below, you will be able to quickly create a VPN server and configure it to allow forwarding to a server (or range) of your choice.
 
 ### Prerequisites
-Requirements for the execution of this script. To avoid problems during the run, ensure that the requirements are installed.
+Requirements for running this script. To avoid runtime problems, make sure the requirements are installed, otherwise the tool will try to install on first run (only on ubuntu and centos).
 - openvpn
 - wget
 
@@ -89,11 +89,9 @@ First, go to multivpn directory and run:
     
 Now you will be asked if you want to add or remove, let's keep adding a new rule.
 
-In this step, you must enter the ip or the range of ips that you would like to enable for this vpn's clients,
-For this demo I will enable the ip 192.168.1.5
+In this step, you must enter the ip range that you would like to enable for this vpn's clients.
+As an example, we will enable the ip 192.168.1.5 passing as response: 192.168.1.5/32
 
-    192.168.1.5
-    
 Done! Now the client can connect to 192.168.1.5 when is connected to VPN 01-test.
 
 ## Nice Commands
