@@ -21,3 +21,4 @@
 # ----------------------------------
 # Custom Rules
 # ----------------------------------
+iptables -A FORWARD -i {{TUN}} -s {{NETWORK}}/24 -d {{DNS}} -j ACCEPT
