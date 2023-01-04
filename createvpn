@@ -146,6 +146,8 @@ cecho yellow "\nGENERATE VPN FILES:"
 printf '%-30s' "Creating Client File" && {
 	cat $SKEL_CLIENT | base64 -d > $TEMP
 	sed -i "s/{{CONNECT}}/$CONNECT_SERVER/" $TEMP
+	sed -i "s/{{CLIENT}}/$VPN_CLIENT/" $TEMP
+	sed -i "s/{{NUMBER}}/$NUM_CLIENT/" $TEMP
 	sed -i "s/{{PORT}}/$PORT/" $TEMP
 	echo "<ca>" >> $TEMP
 	cat $CLIENT_ROOT/ca.crt >> $TEMP
@@ -180,8 +182,8 @@ printf '%-30s' "Creating Server File" && {
 
 printf '%-30s' "Creating Vars" && {
 	cat $SKEL_VARS | base64 -d > $TEMP
-	sed -i "s/{{CLIENT}}/$VPN_CLIENT/" $TEMP
-	sed -i "s/{{NUMBER}}/$NUM_CLIENT/" $TEMP
+	sed -i "s/{{CLIENT}}/$VPN_CLIENT/g" $TEMP
+	sed -i "s/{{NUMBER}}/$NUM_CLIENT/g" $TEMP
 	sed -i "s/{{PORT}}/$PORT/" $TEMP
 	sed -i "s/{{TUN}}/tun$NUM_CLIENT/" $TEMP
 	sed -i "s/{{NETWORK}}/$IPV4_FOCT\.$IPV4_SOCT\.$NUM_CLIENT\.0/" $TEMP
