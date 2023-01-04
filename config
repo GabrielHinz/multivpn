@@ -9,8 +9,10 @@ ROOT_VPN='/etc/openvpn'
 # ----------------------------------
 # VPN Network Settings
 # ----------------------------------
-CONNECT_SERVER='vpn.example.com' 
-VPN_DNS='8.8.8.8'
+CONNECT_SERVER='vpn.example.com' # Your server connect
+VPN_DNS=''	# Check your network settings
+VPN_ROUTE=''	# Check your network settings
+VPN_MASK=''	# Check your network settings
 
 # ----------------------------------
 # VPN Interface
