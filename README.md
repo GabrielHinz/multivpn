@@ -28,15 +28,13 @@ On config file, define the your network and company settings. You can leave most
 
     vim config
 
+#### Network settings
 * CONNECT_SERVER: Your server's IP or DNS record
-
-The `ifconfig` command can help in network configuration:
-
-* VPN_DNS: The dns that will be used in your vpn (Default: 8.8.8.8)
-* VPN_ROUTE: The route of your VPN, if you are using some cloud this information can be related to your VPC.
+* VPN_DNS: The DNS that will be used in your VPN
+* VPN_ROUTE: The route of your network.
 * VPN_MASK: The mask used by your route.
 
-And configure the self-signed cert data
+#### Self-signed cert settings
 * VAR_COUNTRY: 2 letter code of yout country
 * VAR_PROVINCE: Full name of your province
 * VAR_CITY: Full name of your city
