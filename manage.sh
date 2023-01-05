@@ -226,7 +226,7 @@ while true; do
 				read -p "Allow $arg FORWARD (ex: 192.168.1.0/24): " forward_range
 				rule="iptables -A FORWARD -i $interface -s $network/24 -d $forward_range -j ACCEPT"
 				echo $rule >> $ROOT_VPN/$arg/rules/iptables && {
-					iptables -D FORWARD -j DROP && $rule
+					iptables -D FORWARD -j DROP 2>/dev/null; $rule
 					iptables -A FORWARD -j DROP
 				}
 			elif [[ $config_type =~ ^[rR] ]]; then
