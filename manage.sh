@@ -196,7 +196,7 @@ while true; do
 			[[ "${2}" =~ $VPN_REGEX || "${2}" = 'all' ]] && arg=${2} || usage
 			cecho yellow "\nENABLING:"
 			if [ ! -f $RULES_AUTOSTART ]; then
-				cp $RULES_ATUOSTART $ROOT_VPN/multivpn/
+				cp $RULES_AUTOSTART $ROOT_VPN/multivpn/
 			fi	
 			if [ $arg = 'all' ]; then
 				for vpn in $_ALL; do
@@ -208,7 +208,7 @@ while true; do
 				done
 			else
 				printf '%-22s' "Enabling $arg"
-				if ! grep -q $arg $ROOT_VPN/multivpn/.enabled; then
+				if ! grep -q $arg $ROOT_VPN/multivpn/.enabled 2>/dev/null; then
 					echo $arg >> $ROOT_VPN/multivpn/.enabled
 				fi
 				cecho green "[Enabled]"
