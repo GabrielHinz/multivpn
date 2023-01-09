@@ -11,8 +11,7 @@ Requirements for running this script. To avoid runtime problems, make sure the r
 
 ### Recomendations
 Run this program on a linux server CentOS or Ubuntu.
-* Tested on a Centos7 server.
-* Tested on a Ubuntu 18.04 server.
+* Tested on a Centos 7 server.
 
 ### Installing
 To run this project on your server, first clone the repository
