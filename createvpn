@@ -198,6 +198,11 @@ printf '%-30s' "Creating Rules" && {
         sed -i "s/{{NETWORK}}/$IPV4_FOCT\.$IPV4_SOCT\.$NUM_CLIENT\.0/g" $TEMP
 	sed -i "s/{{DNS}}/$VPN_DNS/g" $TEMP
 	mv $TEMP $CLIENT_ROOT/rules/iptables
+	iptables -C FORWARD -j DROP 2>/dev/null && {
+		iptables -D FORWARD -j DROP
+		bash $CLIENT_ROOT/rules/iptables
+		iptables -A FORWARD -j DROP
+	} || bash $CLIENT_ROOT/rules/iptables
 } &>/dev/null && echo_success || echo_failed
 
 # ---------------------------------------------
