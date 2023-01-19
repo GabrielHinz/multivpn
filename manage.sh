@@ -195,7 +195,7 @@ while true; do
 		--enable )
 			[[ "${2}" =~ $VPN_REGEX || "${2}" = 'all' ]] && arg=${2} || usage
 			cecho yellow "\nENABLING:"
-			if [ ! -f $RULES_AUTOSTART ]; then
+			if [ ! -f $ROOT_VPN/multivpn/autostart ]; then
 				cp $RULES_AUTOSTART $ROOT_VPN/multivpn/
 			fi	
 			if [ $arg = 'all' ]; then
