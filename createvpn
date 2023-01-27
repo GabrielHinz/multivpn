@@ -140,6 +140,7 @@ TEMP=$ROOT/vpn/vpn-$VPN_CLIENT\.tmp
 
 cecho yellow "\nGENERATE VPN FILES:"
 
+read -p "Enable user/pass authentication? " VPN_AUTH
 # ---------------------------------------------
 # VPN CREATION - Client
 # ---------------------------------------------
@@ -149,6 +150,8 @@ printf '%-30s' "Creating Client File" && {
 	sed -i "s/{{CLIENT}}/$VPN_CLIENT/" $TEMP
 	sed -i "s/{{NUMBER}}/$NUM_CLIENT/" $TEMP
 	sed -i "s/{{PORT}}/$PORT/" $TEMP
+	 [[ "$VPN_AUTH" =~ ^[yY]$ ]] && \
+		echo "auth-user-pass" >> $TEMP
 	echo "<ca>" >> $TEMP
 	cat $CLIENT_ROOT/ca.crt >> $TEMP
 	echo "</ca>" >> $TEMP
@@ -177,6 +180,8 @@ printf '%-30s' "Creating Server File" && {
 	sed -i "s/{{ROUTE}}/$VPN_ROUTE/" $TEMP
 	sed -i "s/{{MASK}}/$VPN_MASK/" $TEMP
 	sed -i "s/{{VPN_DNS}}/$VPN_DNS/" $TEMP
+	[[ "$VPN_AUTH" =~ ^[yY]$ ]] && \
+		 echo "auth-user-pass-verify auth.py via-env" >> $TEMP
 	mv $TEMP $CLIENT_ROOT/openvpn.conf
 } &>/dev/null && echo_success || echo_failed
 
@@ -187,15 +192,17 @@ printf '%-30s' "Creating Vars" && {
 	sed -i "s/{{PORT}}/$PORT/" $TEMP
 	sed -i "s/{{TUN}}/tun$NUM_CLIENT/" $TEMP
 	sed -i "s/{{NETWORK}}/$IPV4_FOCT\.$IPV4_SOCT\.$NUM_CLIENT\.0/" $TEMP
+	[[ "$VPN_AUTH" =~ ^[yY]$ ]] && VPN_SECURITY="3" || VPN_SECURITY="2"
+	sed -i "s/{{SECURITY}}/$VPN_SECURITY/" $TEMP
 	mv $TEMP $CLIENT_ROOT/.vars
 } &>/dev/null && echo_success || echo_failed
 
 printf '%-30s' "Creating Rules" && {
 	cat $RULES_CUSTOM > $TEMP
 	sed -i '/^#/d' $TEMP
-        sed -i "s/{{PORT}}/$PORT/g" $TEMP
-        sed -i "s/{{TUN}}/tun$NUM_CLIENT/g" $TEMP
-        sed -i "s/{{NETWORK}}/$IPV4_FOCT\.$IPV4_SOCT\.$NUM_CLIENT\.0/g" $TEMP
+	sed -i "s/{{PORT}}/$PORT/g" $TEMP
+	sed -i "s/{{TUN}}/tun$NUM_CLIENT/g" $TEMP
+	 sed -i "s/{{NETWORK}}/$IPV4_FOCT\.$IPV4_SOCT\.$NUM_CLIENT\.0/g" $TEMP
 	sed -i "s/{{DNS}}/$VPN_DNS/g" $TEMP
 	mv $TEMP $CLIENT_ROOT/rules/iptables
 	iptables -C FORWARD -j DROP 2>/dev/null && {
@@ -212,6 +219,8 @@ printf '%-30s' "Creating Rules" && {
 	cecho red "\nErrors were found in the operation, exiting.."
 	exit 1
 }
+
+[[ "$VPN_AUTH" =~ ^[yY]$ ]] && cp $ROOT/auth/resources/auth.py $CLIENT_ROOT
 
 if mv $ROOT/vpn/$VPN_CLIENT $ROOT_VPN/$FORMATED_NUM\-$VPN_CLIENT; then
 	cecho green "\nVPN $FORMATED_NUM-$VPN_CLIENT Created!"
