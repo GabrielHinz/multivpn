@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 import os
 import re
 import sys
@@ -93,18 +93,19 @@ if __name__ == '__main__':
     """Starts the authenticator"""
     auth = MultivpnAuth()
     if len(sys.argv) > 1:
-        username = input("Username: ")
-        if sys.argv[1] in ['-c', '--create']:
-            password = input(f"Password for {username}: ")
-            auth.create_user(username, password)
-        elif sys.argv[1] in ['-r', '--remove']:
-            auth.delete_user(username)
+        if sys.argv[1] == 'manage':
+            username = input("Username: ")
+            if sys.argv[2] in ['-c', '--create']:
+                password = input(f"Password for {username}: ")
+                auth.create_user(username, password)
+            elif sys.argv[2] in ['-r', '--remove']:
+                auth.delete_user(username)
+            elif sys.argv[2] in ['-a', '--auth']:
+                password = input(f"Password for {username}: ")
+                print(auth.authenticate(username, password))
         else:
-            print("Invalid option..")
-            sys.exit(1)
-    else:
-        username = os.environ.get('username')
-        password = os.environ.get('password')
-        if auth.authenticate(username, password):
-            sys.exit(0)
-        sys.exit(1)
+            username = os.environ.get('username')
+            password = os.environ.get('password')
+            if auth.authenticate(username, password):
+                sys.exit(0)
+    sys.exit(1)

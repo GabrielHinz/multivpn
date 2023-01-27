@@ -70,6 +70,7 @@ cecho yellow "\nVPN SERVER CONFIG:"
 
 [[ -z $VPN_CLIENT ]] && read -p "Name: " VPN_CLIENT
 [[ -z $NUM_CLIENT ]] && read -p "Number (1-254): " NUM_CLIENT
+read -p "User/Pass Authentication? [y/N] " VPN_AUTH
 
 while ((NUM_CLIENT < 1 || NUM_CLIENT > 254)); do
 	echo "Select a valid number!"
@@ -140,7 +141,6 @@ TEMP=$ROOT/vpn/vpn-$VPN_CLIENT\.tmp
 
 cecho yellow "\nGENERATE VPN FILES:"
 
-read -p "Enable user/pass authentication? " VPN_AUTH
 # ---------------------------------------------
 # VPN CREATION - Client
 # ---------------------------------------------
@@ -220,7 +220,10 @@ printf '%-30s' "Creating Rules" && {
 	exit 1
 }
 
-[[ "$VPN_AUTH" =~ ^[yY]$ ]] && cp $ROOT/auth/resources/auth.py $CLIENT_ROOT
+[[ "$VPN_AUTH" =~ ^[yY]$ ]] && {
+	cp $ROOT/auth/resources/auth.py $CLIENT_ROOT
+	chmod +x $CLIENT_ROOT/auth.py
+}
 
 if mv $ROOT/vpn/$VPN_CLIENT $ROOT_VPN/$FORMATED_NUM\-$VPN_CLIENT; then
 	cecho green "\nVPN $FORMATED_NUM-$VPN_CLIENT Created!"
