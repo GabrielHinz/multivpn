@@ -100,7 +100,8 @@ start_vpn() {
 			rm -f $vpn_home/vpn-server.lock
 		fi
 	fi
-	/usr/sbin/openvpn --cd $vpn_home --script-security 2 --daemon \
+    source $vpn_home/.vars
+	/usr/sbin/openvpn --cd $vpn_home --script-security $security --daemon \
 		--config $vpn_home/openvpn.conf &>/dev/null \
 		 && echo_success || echo_failed 
 	[[ $? -eq 0 ]] && touch $vpn_home/vpn-server.lock
