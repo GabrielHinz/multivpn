@@ -11,10 +11,11 @@
 # Auto Start
 # ----------------------------------
 ROOT=/etc/openvpn
-[[ ! -f $ROOT/multivpn/.enable ]] && exit 0
+[[ ! -f $ROOT/multivpn/.enabled ]] && exit 0
 for vpn in $(cat $ROOT/multivpn/.enabled); do
+        source $ROOT/$vpn/.vars
         if ! ps -ef | grep "[o]penvpn --cd $ROOT/$vpn" &>/dev/null; then
-                openvpn --cd $ROOT/$vpn --script-security 2 --daemon \
+                openvpn --cd $ROOT/$vpn --script-security $security --daemon \
                         --config $ROOT/$vpn/openvpn.conf &>/dev/null
         fi
 done
