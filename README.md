@@ -8,6 +8,7 @@ Using this openvpn based tool you can quickly create multiple vpn services and c
 Requirements for running this script. To avoid runtime problems, make sure the requirements are installed, otherwise the tool will try to install on first run (only on ubuntu and centos).
 - openvpn
 - wget
+- python3 (for auth)
 
 ### Recomendations
 Run this program on a linux server CentOS or Ubuntu.
