@@ -46,7 +46,7 @@ if [ "${GEN_VARS}:no" = 'yes'  ]; then
 		read -p "Confirm [yes/no]: " VAR_ACCEPT
 	done
 else
-	cecho yellow "\nLOADING FROM CONF FILE:"
+	cecho yellow "\nLOADING FROM CONFIG FILE:"
 	echo -e "Country: $VAR_COUNTRY"
 	echo -e "Province: $VAR_PROVINCE"
 	echo -e "City: $VAR_CITY"
@@ -70,7 +70,7 @@ cecho yellow "\nVPN SERVER CONFIG:"
 
 [[ -z $VPN_CLIENT ]] && read -p "Name: " VPN_CLIENT
 [[ -z $NUM_CLIENT ]] && read -p "Number (1-254): " NUM_CLIENT
-read -p "User/Pass Authentication? [y/N] " VPN_AUTH
+# read -p "User/Pass Authentication? [y/N] " VPN_AUTH
 
 while ((NUM_CLIENT < 1 || NUM_CLIENT > 254)); do
 	echo "Select a valid number!"
