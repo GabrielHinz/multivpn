@@ -46,13 +46,13 @@ check_dependencies() {
 			yum install epel-release -y
 			yum install $1 -y 2>/dev/null
 		else
-			cecho red "Can't install $1!"
+			cecho red "Can't install $1! Try install manually."
 			exit
 		fi
 	}
 	echo -e "\nChecking dependencies.."
 	if ! which openvpn &>/dev/null; then
-		read -rep $'\nOpenVPN not installed, continue to install? ' install
+		read -rep $'\nOpenVPN not installed, continue to install? [y/N] ' install
 		[[ "$install" =~ ^[yY]$ ]] || exit 1
 		cecho yellow "Installing OpenVPN.."
 		package_install openvpn
@@ -64,7 +64,7 @@ check_dependencies() {
 		mkdir -p /etc/openvpn/multivpn
 	fi
 	if ! which wget &>/dev/null; then
-		read -rep $'\nwget not installed, continue to install? ' install
+		read -rep $'\nwget not installed, continue to install? [y/N] ' install
 		[[ "$install" =~ ^[yY]$ ]] || exit 1
 		cecho yellow "Installing wget.."
 		package_install wget
