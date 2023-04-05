@@ -33,4 +33,6 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 # ----------------------------------
 # Autostart
 # ----------------------------------
-[[ -f autostart ]] && bash autostart
+if [ -f autostart ]; then
+	bash autostart
+fi
