@@ -47,7 +47,7 @@ check_dependencies() {
 			yum install $1 -y 2>/dev/null
 		else
 			cecho red "Can't install $1! Try install manually."
-			exit
+			exit 1
 		fi
 	}
 	echo -e "\nChecking dependencies.."
@@ -70,8 +70,8 @@ check_dependencies() {
 		package_install wget
 		if ! which wget &>/dev/null; then
 			cecho red "Try to install in another way!"
-		exit 1
-	fi
+			exit 1
+		fi
 	fi
 	if [ ! -f $SERVICE_ROOT/multivpn.service ]; then
 		cp $SERVICE_NAME $SERVICE_ROOT/
@@ -80,6 +80,11 @@ check_dependencies() {
 	if [ ! -f $iptables_file ]; then
 		mkdir -p $ROOT_VPN/multivpn
 		cat $RULES_MAIN > $iptables_file
+	fi
+	echo "Checking configuration.."
+	if [ -z "$VPN_DNS" ] || [ -z "$VPN_ROUTE" ] || [ -z "$VPN_MASK" ]; then
+		cecho red "Configure network settings in config file!"
+		exit 1
 	fi
 }
 
