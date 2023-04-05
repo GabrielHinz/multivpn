@@ -260,7 +260,7 @@ while true; do
 			fi
 			break ;;
 		--init )
-			bash createvpn
+			bash create-vpn.sh
 			break ;;
 		--list | -l ) 
 			cecho yellow "\nVPN DETAILS:"
