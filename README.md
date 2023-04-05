@@ -34,6 +34,12 @@ On config file, define the your network and company settings. You can leave most
 * VPN_ROUTE: The route of your network.
 * VPN_MASK: The mask used by your route.
 
+#### AWS Cloud Example:
+    CONNECT_SERVER='ec2-XX-XXX-XXX-XXX.sa-east-1.compute.amazonaws.com' <- EC2 Public DNS
+    VPN_DNS='172.31.0.2'    <- VPC DNS
+    VPN_ROUTE='172.31.0.0'  <- Subnet IPv4
+    VPN_MASK='255.255.0.0'  <- Subnet Mask
+
 #### Self-signed cert settings
 * VAR_COUNTRY: 2 letter code of yout country
 * VAR_PROVINCE: Full name of your province
